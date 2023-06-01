@@ -98,7 +98,7 @@ import {
 } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import {useRouter} from 'vue-router'
-import {udreq} from '../utils/requests'
+import {request} from '../utils/requests'
 let $router = useRouter()
 // 选中的选项
 let selectedKeys = ref(['1'])
@@ -110,8 +110,9 @@ let collapsed = ref(false)
 const current = ref(['menu1']);
 
 const test =async ()=>{
-    // let ret = await udreq.post("http://172.9.100.161:1155/rbac/login/",{username:'yuan.yang',password:'Croonyy923014'})
-    let ret = await udreq.get("/mock_test/")
+    // let ret = await request.post("http://172.9.100.161:1155/rbac/login/",{username:'yuan.yang',password:'Croonyy923014'})
+    // let ret = await request.post("http://192.168.1.4:1234/rbac/login/",{username:'admin',password:'123456'})
+    let ret = await request.get("/mock_test/")
     console.log(ret.data)
 
 }

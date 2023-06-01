@@ -2,7 +2,7 @@ import axios from 'axios'
 
 var request = axios.create({
     // baseURL:'http://localhost:8080/api/',
-    // baseURL:'http://localhost:8080/api/',
+    baseURL:'http://localhost:8080',
     timeout: 20000,
     headers:{
 
