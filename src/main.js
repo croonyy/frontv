@@ -5,7 +5,7 @@ import router from './router'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 
-
+// 劫持ajax请求，生产环境要注释
 import './mock/index.js'
 
 // 刷新时检查是否需要更新token

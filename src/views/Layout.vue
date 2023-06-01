@@ -112,7 +112,7 @@ const current = ref(['menu1']);
 const test =async ()=>{
     // let ret = await request.post("http://172.9.100.161:1155/rbac/login/",{username:'yuan.yang',password:'Croonyy923014'})
     // let ret = await request.post("http://192.168.1.4:1234/rbac/login/",{username:'admin',password:'123456'})
-    let ret = await request.get("/mock_test/")
+    let ret = await request.get("mock_test/")
     console.log(ret.data)
 
 }
