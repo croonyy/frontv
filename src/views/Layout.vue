@@ -80,7 +80,7 @@
                 background: '#fff',
                 minHeight: '280px'
             }">
-                Content
+                <button @click="test()">搞什么</button>
             </a-layout-content>
         </a-layout>
     </a-layout>
@@ -98,6 +98,7 @@ import {
 } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import {useRouter} from 'vue-router'
+import {udreq} from '../utils/requests'
 let $router = useRouter()
 // 选中的选项
 let selectedKeys = ref(['1'])
@@ -107,6 +108,13 @@ let openKeys = ref(['sub1'])
 let collapsed = ref(false)
 // 顶部菜单选中的选项
 const current = ref(['menu1']);
+
+const test =async ()=>{
+    // let ret = await udreq.post("http://172.9.100.161:1155/rbac/login/",{username:'yuan.yang',password:'Croonyy923014'})
+    let ret = await udreq.get("/mock_test/")
+    console.log(ret.data)
+
+}
 
 </script>
 <style scoped lang="scss">

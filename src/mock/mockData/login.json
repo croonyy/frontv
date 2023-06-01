@@ -1,0 +1,83 @@
+import Mocks from "mockjs";
+const baseUrl = '/ceshi'
+
+const tipList = [
+    {
+        id: 101,
+        tip: "今天吃什么呢",
+        content: "饺子",
+    },
+    {
+        id: 102,
+        tip: "明天吃什么呢",
+        content: "大米饭",
+    },
+    {
+        id: 103,
+        tip: "后天吃什么呢",
+        content: "玉米",
+    },
+    {
+        id: 104,
+        tip: "在墓地里面吃什么呢",
+        content: "啃土",
+    }
+];
+
+const article = Mocks.mock(baseUrl + '/api/article', () => {
+    return tipList
+})
+
+const selectA = Mocks.mock(baseUrl + "/api/selectArticle", (ops) => {
+    const obj = eval("(" + ops.body + ")")
+    const list = []
+    tipList.filter(Item => {
+        if (Item.tip.indexOf(obj.val) >= 0) {
+            list.push(Item)
+        }
+    })
+    return list
+})
+
+const details = Mocks.mock(baseUrl + "/api/getDetail", 'post', {
+    "data|1-3": [{
+        "id|+1": 1,
+        "string|4-7": "",
+        "age|33-99": 50,
+        "like": "@boolean",
+        "number": "@natural(10000)",
+        "int": "@integer(33,99)",
+        "float": "@float(1,100,2,4)",
+        "charatcter": "@character('upper')",
+        "string": "@string('symbol',4,7)",
+        "random": "@range(2,8,4)",
+        "data": "@date('yyyy-MM-dd')",
+        "time": "@time('HH:mm:ss')",
+        "dateTime": "@datetime('yyyy-MM-dd HH:mm:ss')",
+        "now": "@now('year')",
+        "image": "@image('100x100','#3388ff','image')",
+        "color": "@color",
+        "rgb": "@rgb",
+        "paragraph": "@paragraph(2)",
+        "sentence": "@sentence(5)",
+        "word": "@word(100)",
+        "title": "@title(4,7)",
+        "cparagraph": "@cparagraph(4)",
+        "cfirst": "@cfirst",
+        "name": "@name",
+        "url": "@url",
+        "email": "@email",
+        "province": "@province",
+        "city": "@city",
+        "guid": "@guid",
+        "uuid": "@id"
+    }]
+})
+
+export default (router) => {
+    return [
+        router.get(baseUrl + '/api/article', article),
+        router.get(baseUrl + '/api/selectArticle', selectA),
+        router.get(baseUrl + '/api/getDetail', details)
+    ]
+}
