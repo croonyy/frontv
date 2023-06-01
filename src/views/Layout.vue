@@ -80,7 +80,9 @@
                 background: '#fff',
                 minHeight: '280px'
             }">
-                <button @click="test()">搞什么</button>
+                <button @click="test()">测试</button>
+                <button @click="test1()">测试1</button>
+                <button @click="test2()">测试2</button>
             </a-layout-content>
         </a-layout>
     </a-layout>
@@ -97,8 +99,8 @@ import {
     MenuFoldOutlined
 } from '@ant-design/icons-vue';
 import { ref } from 'vue';
-import {useRouter} from 'vue-router'
-import {request} from '../utils/requests'
+import { useRouter } from 'vue-router'
+import { request } from '../utils/requests'
 let $router = useRouter()
 // 选中的选项
 let selectedKeys = ref(['1'])
@@ -109,12 +111,22 @@ let collapsed = ref(false)
 // 顶部菜单选中的选项
 const current = ref(['menu1']);
 
-const test =async ()=>{
+const test = async () => {
     // let ret = await request.post("http://172.9.100.161:1155/rbac/login/",{username:'yuan.yang',password:'Croonyy923014'})
     // let ret = await request.post("http://192.168.1.4:1234/rbac/login/",{username:'admin',password:'123456'})
     let ret = await request.get("mock_test/")
     console.log(ret.data)
+}
 
+const test1 = async () => {
+    let ret = await request.get("mock_test1/")
+    console.log(ret.data)
+
+}
+
+const test2 = async () => {
+    let ret = await request.post("mock_test2/", { 'a': 'a', 'b': 'b' })
+    console.log(ret.data)
 }
 
 </script>
@@ -205,6 +217,7 @@ const test =async ()=>{
 // }
 
 @media screen and (max-width: 768px) {
+
     //消失有效，回不来 
     // .header-right, 
     .trigger,
@@ -216,7 +229,7 @@ const test =async ()=>{
 
 
 
-.container{
+.container {
     background-color: #cdcdcd;
 }
 </style>

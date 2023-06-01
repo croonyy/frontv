@@ -29,10 +29,12 @@
 </template>
 
 <script setup>
-import {$login} from '../api/login'
+import { $login } from '../api/login'
+
+import { request } from '../utils/requests'
 import { reactive } from 'vue'
 //导入路由器对象
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 let $router = useRouter()
 
 const formState = reactive({
@@ -43,8 +45,9 @@ const formState = reactive({
 const onFinish = async values => {
   // console.log('Success:', values);
   let { username, password } = values
-  let ret = await $login({username,password})
-  if(ret){
+  // let ret = await $login({username,password})
+  let ret = request.post("login/", { username, password })
+  if (ret) {
     //跳转
     console.log('login后跳转:/layout')
     $router.push('/layout')

@@ -1,7 +1,0 @@
-{
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsInR5cGUiOiJqd3QifQ.eyJpYXQiOjE2ODU2MjA4MTMsImV4cCI6MTY4NTcwNzIxMywidXNlcm5hbWUiOiJhZG1pbiJ9.S-KFRFr7WsrosEHoZXjXQr6ikZKivRW0-zRZx08AhA0",
-    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsInR5cGUiOiJqd3QifQ.eyJpYXQiOjE2ODU2MjA4MTMsImV4cCI6MTY4NTcwNzIxMywidXNlcm5hbWUiOiJhZG1pbiIsImdyYW50X3R5cGUiOiJyZWZyZXNoIn0.N1H4LxJV4ggcva1CwKLywe1h8elGdszkd9djP9jxqs0",
-    "iat": "2023-06-01T12:00:13.903944",
-    "exp": "2023-06-02T12:00:13.903944",
-    "status": 1
-}
