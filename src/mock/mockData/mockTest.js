@@ -2,7 +2,15 @@
 // import Mock from 'mockjs'
 // const Random = Mock.Random;
 const login = (params) => {
-  console.log(JSON.parse(params.body));
+  console.log('mock:', JSON.parse(params.body));
+  if (Math.random() >= 0.5) {
+    console.log('##########')
+    throw {
+      code: -1,
+      msg: '类型错误'
+    }
+
+  }
   return {
     access_token:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsInR5cGUiOiJqd3QifQ.eyJpYXQiOjE2ODU2MjA4MTMsImV4cCI6MTY4NTcwNzIxMywidXNlcm5hbWUiOiJhZG1pbiJ9.S-KFRFr7WsrosEHoZXjXQr6ikZKivRW0-zRZx08AhA0",

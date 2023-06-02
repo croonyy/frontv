@@ -2,16 +2,32 @@
   <div class="login">
     <div class="content">
       <div class="logo">
-        <img alt="Vue logo" src="../assets/filmy-horizontal.png">
+        <img alt="Vue logo" src="../assets/filmy-horizontal.png" />
       </div>
       <div class="login-form">
-        <a-form :model="formState" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 18 }" autocomplete="off"
-          @finish="onFinish" @finishFailed="onFinishFailed">
-          <a-form-item label="账号" name="username" :rules="[{ required: true, message: '请输入账号!' }]">
+        <a-form
+          :model="formState"
+          name="basic"
+          :label-col="{ span: 4 }"
+          :wrapper-col="{ span: 18 }"
+          autocomplete="off"
+          @finish="onFinish"
+          @finishFailed="onFinishFailed"
+        >
+          <a-form-item
+            label="账号"
+            name="username"
+            :rules="[{ required: true, message: '请输入账号!' }]"
+          >
             <a-input v-model:value="formState.username" />
           </a-form-item>
 
-          <a-form-item class='ud_password' label="密码" name="password" :rules="[{ required: true, message: '请输入密码!' }]">
+          <a-form-item
+            class="ud_password"
+            label="密码"
+            name="password"
+            :rules="[{ required: true, message: '请输入密码!' }]"
+          >
             <a-input-password v-model:value="formState.password" />
           </a-form-item>
 
@@ -29,32 +45,32 @@
 </template>
 
 <script setup>
-import { $login } from '../api/login'
-
-import { request } from '../utils/requests'
-import { reactive } from 'vue'
+import { reactive } from "vue";
 //导入路由器对象
-import { useRouter } from 'vue-router'
-let $router = useRouter()
+// import { useRouter } from "vue-router";
+import { $login } from "../api/login";
+
+import { useRouter } from "vue-router";
+// 必须要放到vue文件里面，不然$router是一个undifined
+let $router = useRouter();
 
 const formState = reactive({
-  username: '',
-  password: '',
+  username: "",
+  password: "",
   remember: true,
 });
-const onFinish = async values => {
-  // console.log('Success:', values);
-  let { username, password } = values
-  // let ret = await $login({username,password})
-  let ret = request.post("login/", { username, password })
+
+const onFinish = async (values) => {
+  let { username, password } = values;
+  let ret = await $login({ username, password });
+  console.log(ret);
   if (ret) {
-    //跳转
-    console.log('login后跳转:/layout')
-    $router.push('/layout')
+    $router.push("/layout");
   }
 };
-const onFinishFailed = errorInfo => {
-  console.log('Failed:', errorInfo);
+
+const onFinishFailed = (errorInfo) => {
+  console.log("Failed:", errorInfo);
 };
 </script>
 
@@ -74,7 +90,6 @@ const onFinishFailed = errorInfo => {
     border: 1px solid white;
     border-radius: 6px;
     background: white;
-
   }
 
   .logo {
@@ -97,7 +112,6 @@ const onFinishFailed = errorInfo => {
 //   background-color: green;
 //   padding: 4px 11px;
 // }
-
 
 // input:-internal-autofill-selected {
 //   background-color: white;

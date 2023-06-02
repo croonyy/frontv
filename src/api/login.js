@@ -1,26 +1,34 @@
-import { $post, $setToken } from "../utils/requests";
+import { request, $setToken } from "../utils/requests";
 // import md5 from "js-md5";
-
 import { message } from "ant-design-vue";
 
 // 登录api
 export const $login = async (params) => {
-  //   params.password = md5(md5(params.password).split("").reverse().join(""));
-  // let data = await $post("rbac/login/", params); // 开了代理的话
-  let data = await $post("http://172.9.100.161:1155/rbac/login/", params); // 没开代理
-  console.log(data);
-  if (data.status) {
+  // let ret = await $login({username,password})
+  let ret = {}
+  try {
+
+
+    ret = await request.post("login/", { params });
+  }
+  catch (e) {
+    console.log(e)
+    message.error("随机错误。");
+    return 0
+  }
+  console.log(ret.data)
+  if (ret.data.status) {
+    let data = ret.data
     let { access_token } = data;
     //浏览器缓存保存access_token
     // sessionStorage.setItem('token',access_token)
     localStorage.setItem("token", access_token);
     //设置请求头token
     $setToken(access_token);
-
-    // console.log(data);
     message.success("登录成功");
-    return data.status;
+    return 1
   } else {
-    message.error(data.msg);
+    message.error(ret.data.msg);
+    return 0
   }
 };
