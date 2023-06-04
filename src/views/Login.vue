@@ -65,7 +65,7 @@ const onFinish = async (values) => {
   let ret = await $login({ username, password });
   console.log(ret);
   if (ret) {
-    $router.push("/layout");
+    // $router.push("/layout");
   }
 };
 
@@ -114,6 +114,6 @@ const onFinishFailed = (errorInfo) => {
 // }
 
 // input:-internal-autofill-selected {
-//   background-color: white;
+//   background-color: rgb(223, 15, 15);
 // }
 </style>

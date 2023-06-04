@@ -7,6 +7,18 @@ var request = axios.create({
   headers: {},
 });
 
+
+request.interceptors.response.use(
+  (res) => res, // 成功的请求返回处理
+  (err) => { // 异常的请求返回处理
+    const data = {
+      message: err.response.data.message || '请重试',
+      code: err.response.status !== 200 ? err.response.status : err.response.data.errCode
+    }
+    throw data;
+  }
+)
+
 export { request };
 
 // 将token添加到请求头

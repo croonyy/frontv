@@ -15,8 +15,8 @@ Mock.setup({
 //Mock依赖包对外暴露的是一个Mock对象，这个对象提供的一个mock方法可以模拟数据
 //参数:第一个参数 ，模块数据将来axios请求的地址，第二个参数:获取到的数据或者反回数据的函数
 // Mock.mock(`${base_url}mock_test/`, "get", { code: 200, data: loginData });
-Mock.mock(`${base_url}login/`, "post", (params) => mockTest.login(params));
-
+// mockTest.login.catch((e)=>{console.log(e)})
+Mock.mock(`${base_url}login/`, "post", mockTest.login);
 Mock.mock(`${base_url}mock_test/`, "get", mockTest.testData());
 Mock.mock(`${base_url}mock_test1/`, "get", mockTest.testData1);
 Mock.mock(`${base_url}mock_test2/`, "post", (params) =>
