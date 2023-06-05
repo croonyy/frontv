@@ -27,9 +27,14 @@
 input:-internal-autofill-previewed,
 input:-internal-autofill-selected {
   -webkit-text-fill-color: #000000;
-  transition: background-color 9999s ease-out 0.5s;
+  transition: background-color 9999999s ease-out 0.5s;
   /* -webkit-box-shadow: 0 0 0 1000px rgb(255, 0, 0) inset !important; */
   /* -webkit-box-shadow:0 0 0 1000px rgb(255, 255, 255) inset; */
 }
+
+/* 密码框无效 */
+/* input:-webkit-autofill{
+	-webkit-box-shadow:0 0 0 1000px white inset !important;
+} */
 
 </style>

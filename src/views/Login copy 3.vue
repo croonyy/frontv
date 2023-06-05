@@ -38,51 +38,60 @@
           <a-form-item :wrapper-col="{ offset: 4, span: 16 }">
             <a-button type="primary" html-type="submit">登录</a-button>
           </a-form-item>
-          <!-- <a-deta-picker></a-deta-picker> -->
+          <a-deta-picker></a-deta-picker>
         </a-form>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { reactive } from "vue";
+<script>
+import { reactive, defineComponent } from "vue";
 // babel-plugin-import 会帮助你加载 JS 和 CSS
-// import { message } from 'ant-design-vue';
-import { Input as AInput, 
-  FormItem as AFormItem, 
-  InputPassword as AInputPassword, 
-  Checkbox as ACheckbox, 
-  Button as AButton, 
-  Form as AForm
-} from 'ant-design-vue'
+import { DatePicker } from "ant-design-vue";
 
-// 导入数据请求api
-import { $login } from "../api/login";
+import {
+  Input,
+  FormItem,
+  InputPassword,
+  Checkbox,
+  Button,
+  Form,
+} from "ant-design-vue";
 
 //导入路由器对象
-// 必须要放到vue文件里面，不然$router是一个undifined
+// import { useRouter } from "vue-router";
+import { $login } from "../api/login";
+
 import { useRouter } from "vue-router";
-let $router = useRouter();
+// 必须要放到vue文件里面，不然$router是一个undifined
+// let $router = useRouter();
+export default defineComponent({
+  setup() {
+    const formState = reactive({
+      username: "",
+      password: "",
+      remember: true,
+    });
+    const onFinish = async (values) => {
+      let { username, password } = values;
+      let ret = await $login({ username, password });
+      console.log(ret);
+      if (ret) {
+        // $router.push("/layout");
+      }
+    };
 
-const formState = reactive({
-  username: "",
-  password: "",
-  remember: true,
+    const onFinishFailed = (errorInfo) => {
+      console.log("Failed:", errorInfo);
+    };
+    return {
+      formState,
+      onFinish,
+      onFinishFailed,
+    };
+  },
 });
-
-const onFinish = async (values) => {
-  let { username, password } = values;
-  let ret = await $login({ username, password });
-  console.log(ret);
-  if (ret) {
-    $router.push("/layout");
-  }
-};
-
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 </script>
 
 <style lang="scss" scoped>

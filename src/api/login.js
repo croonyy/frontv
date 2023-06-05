@@ -1,4 +1,4 @@
-import { request, $setToken } from "../utils/requests";
+import { request, authRequest, $setToken } from "../utils/requests";
 // import md5 from "js-md5";
 import { message } from "ant-design-vue";
 
@@ -7,10 +7,11 @@ export const $login = async (params) => {
   // let ret = await $login({username,password})
   let ret = {};
   try {
-    ret = await request.post("login/", { params });
+    // window.ud_error()
+    ret = await authRequest.post("login/", params);
   } catch (e) {
     console.log(e);
-    // message.error("随机错误。");
+    message.error(`错误:请看控制台。`);
     return 0;
   }
   console.log(ret.data);

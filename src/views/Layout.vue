@@ -80,14 +80,27 @@
                 background: '#fff',
                 minHeight: '280px'
             }">
-                <button @click="test()">测试</button>
-                <button @click="test1()">测试1</button>
-                <button @click="test2()">测试2</button>
+                <a-button type="primary" @click="test()" size="small">测试</a-button>
+                <a-button type="primary" @click="test1()" size="small">测试1</a-button>
+                <a-button type="primary" @click="test2()" size="small">测试2</a-button>
             </a-layout-content>
         </a-layout>
     </a-layout>
 </template>
 <script setup>
+//组件
+import { 
+  Button as AButton,
+  MenuItem as AMenuItem,
+  SubMenu as ASubMenu,
+  Menu as AMenu,
+  LayoutSider as ALayoutSider,
+  LayoutHeader as ALayoutHeader,
+  LayoutContent as ALayoutContent,
+  Layout as ALayout
+} from 'ant-design-vue'
+
+//图标
 import {
     UserOutlined,
     BellOutlined,
@@ -100,7 +113,7 @@ import {
 } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
-import { request } from '../utils/requests'
+import { request, authRequest } from '../utils/requests'
 let $router = useRouter()
 // 选中的选项
 let selectedKeys = ref(['1'])
@@ -125,7 +138,7 @@ const test1 = async () => {
 }
 
 const test2 = async () => {
-    let ret = await request.post("mock_test2/", { 'a': 'a', 'b': 'b' })
+    let ret = await authRequest.post("mock_test2/", { 'a': 'a', 'b': 'b' })
     console.log(ret.data)
 }
 
@@ -216,15 +229,15 @@ const test2 = async () => {
 //     z-index: 99;
 // }
 
-@media screen and (max-width: 768px) {
+// @media screen and (max-width: 768px) {
 
-    //消失有效，回不来 
-    // .header-right, 
-    .trigger,
-    .left_sider {
-        display: none;
-    }
-}
+//     //侧边栏消失有效，回不来 
+//     // .header-right, 
+//     .trigger,
+//     .left_sider {
+//         display: none;
+//     }
+// }
 
 
 
