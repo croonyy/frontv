@@ -2,12 +2,12 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
-import Antd from "ant-design-vue";
+// import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
-import { message } from "ant-design-vue";
+// import { message } from "ant-design-vue";
 
 // 劫持ajax请求，生产环境要注释
-import "./mock/index.js";
+// import "./mock/index.js";
 
 // 刷新时检查是否需要更新token
 import { $setToken } from "./utils/requests";
@@ -17,7 +17,7 @@ if (token) {
   $setToken(token);
 }
 
-let vm = createApp(App);
+let app = createApp(App);
 // vm.config.errorHandler = (err,vm,info)=>{
 //     console.log('vue global erro handler')
 //     console.log(err)
@@ -28,7 +28,8 @@ let vm = createApp(App);
 
 // import SvgIcon from './.../SvgIcon/index.vue'
 // vm.component('SvgIcon',SvgIcon)
-vm.use(Antd).use(router).mount("#app");
+// vm.use(Antd).use(router).mount("#app");
+app.use(router).mount("#app");
 
 // 为了测试
 

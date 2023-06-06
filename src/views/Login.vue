@@ -45,14 +45,24 @@
 </template>
 
 <script setup>
+import { 
+  Input as AInput,
+  FormItem as AFormItem,
+  InputPassword as AInputPassword,
+  Checkbox as ACheckbox,
+  Button as AButton,
+  Form as AForm,
+} from "ant-design-vue";
+
+
 import { reactive } from "vue";
 //导入路由器对象
 // import { useRouter } from "vue-router";
 import { $login } from "../api/login";
 
-import { useRouter } from "vue-router";
 // 必须要放到vue文件里面，不然$router是一个undifined
-let $router = useRouter();
+// import { useRouter } from "vue-router";
+// let $router = useRouter();
 
 const formState = reactive({
   username: "",
@@ -62,11 +72,7 @@ const formState = reactive({
 
 const onFinish = async (values) => {
   let { username, password } = values;
-  let ret = await $login({ username, password });
-  console.log(ret);
-  if (ret) {
-    // $router.push("/layout");
-  }
+  await $login({ username, password });
 };
 
 const onFinishFailed = (errorInfo) => {
