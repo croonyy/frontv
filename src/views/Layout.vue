@@ -1,20 +1,12 @@
 <template>
   <a-layout class="layout">
     <!-- 左侧 -->
-    <a-layout-sider
-      class="left_sider"
-      collapsedWidth="40"
-      v-model:collapsed="collapsed"
-      :trigger="null"
-      collapsible
-    >
+    <a-layout-sider class="left_sider" collapsedWidth="40" v-model:collapsed="collapsed" :trigger="null" collapsible>
       <div class="logo-container" @click="$router.push('/')">
         <div class="logo-content">
           <!-- <img src="../assets/filmy-horizontal.png" alt="logo"> -->
           <img src="../assets/logo.png" alt="logo" />
-          <span v-if="!collapsed" class="ant-menu-title-content ud_title"
-            >Filmy</span
-          >
+          <span v-if="!collapsed" class="ant-menu-title-content ud_title">Filmy</span>
         </div>
       </div>
       <!-- <a-menu v-model:openKeys="openKeys" 
@@ -23,12 +15,7 @@
             theme="dark"
             :inline-collapsed="collapsed"
             > -->
-      <a-menu
-        v-model:openKeys="openKeys"
-        v-model:selectedKeys="selectedKeys"
-        mode="inline"
-        theme="dark"
-      >
+      <a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" mode="inline" theme="dark">
         <a-sub-menu key="sub1">
           <template #icon>
             <UserOutlined />
@@ -45,23 +32,10 @@
     <a-layout class="container">
       <!-- 顶部 -->
       <a-layout-header class="header">
-        <menu-unfold-outlined
-          v-if="collapsed"
-          class="trigger"
-          @click="() => (collapsed = !collapsed)"
-        />
-        <menu-fold-outlined
-          v-else
-          class="trigger"
-          @click="() => (collapsed = !collapsed)"
-        />
+        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
+        <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
 
-        <a-menu
-          class="header-left"
-          v-model:selectedKeys="current"
-          mode="horizontal"
-          theme="dark"
-        >
+        <a-menu class="header-left" v-model:selectedKeys="current" mode="horizontal" theme="dark">
           <a-menu-item key="menu1">
             <template #icon>
               <bell-outlined />
@@ -76,12 +50,7 @@
           </a-menu-item>
         </a-menu>
 
-        <a-menu
-          class="header-right"
-          v-model:selectedKeys="current"
-          mode="horizontal"
-          theme="dark"
-        >
+        <a-menu class="header-right" v-model:selectedKeys="current" mode="horizontal" theme="dark">
           <a-menu-item key="menu3">
             <template #icon>
               <bell-outlined />
@@ -105,23 +74,15 @@
         </a-menu>
       </a-layout-header>
       <!-- 主体 -->
-      <a-layout-content
-        :style="{
-          margin: '6px',
-          padding: '6px',
-          background: '#fff',
-          minHeight: '280px',
-        }"
-      >
-        <a-button type="primary" @click="test()" style="margin-right: 5px"
-          >测试</a-button
-        >
-        <a-button type="primary" @click="test1()" style="margin-right: 5px"
-          >测试1</a-button
-        >
-        <a-button type="primary" @click="test2()" style="margin-right: 5px"
-          >测试2</a-button
-        >
+      <a-layout-content :style="{
+        margin: '6px',
+        padding: '6px',
+        background: '#fff',
+        minHeight: '280px',
+      }">
+        <a-button type="primary" @click="test()" style="margin-right: 5px">测试登录</a-button>
+        <a-button type="primary" @click="test1()" style="margin-right: 5px">测试token头</a-button>
+        <a-button type="primary" @click="test2()" style="margin-right: 5px">测试token过期</a-button>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -150,7 +111,7 @@ import {
 } from "@ant-design/icons-vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { request,check_token } from "../utils/requests";
+import { request, authRequest, check_token } from "../utils/requests";
 
 
 
@@ -165,17 +126,17 @@ let collapsed = ref(false);
 const current = ref(["menu1"]);
 
 const test = async () => {
-  let ret = await request.post("login/",{username:'yuan.yang',password:'Croonyy923014'});
+  let ret = await request.post("login/", { username: 'yuan.yang', password: 'Croonyy923014' });
   console.log(ret.data);
 };
 
 const test1 = async () => {
-  let ret = await request.get("mock_test1/");
+  let ret = await authRequest.post("func_view_test/",{a:10});
   console.log(ret.data);
 };
 
 const test2 = async () => {
-    await check_token()
+  await check_token()
 };
 </script>
 <style scoped lang="scss">
@@ -260,6 +221,7 @@ const test2 = async () => {
 // }
 
 @media screen and (max-width: 768px) {
+
   //消失有效，回不来
   // .header-right,
   .trigger,
