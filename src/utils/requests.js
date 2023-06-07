@@ -19,7 +19,7 @@ function setReqTokenHeader(req_obj, access_token) {
   req_obj.defaults.headers.Authorization = `Bearer ${access_token}`;
 }
 
-async function check_token() {
+async function checkToken() {
   let token_info = localStorage.getItem("token_info");
   if (!token_info) {
     message.error("登录信息不存在，请重新登录。");
@@ -72,11 +72,11 @@ request.interceptors.response.use(
 authRequest.interceptors.request.use(
   // 请求拦截器 检查并设置Authorization 头
   async (req) => {
-    let token_info = await check_token()
-    if(token_info){
+    let token_info = await checkToken()
+    if (token_info) {
       req.headers.Authorization = `Bearer ${token_info.access_token}`;
     }
-    else{
+    else {
       router.push('login/')
     }
     return req;
@@ -112,4 +112,4 @@ export const $delete = async (url, params) => {
   return data;
 };
 
-export { request, authRequest, check_token, setReqTokenHeader };
+export { request, authRequest, checkToken, setReqTokenHeader };

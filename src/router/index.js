@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { routerCheckToken } from './perms'
 
 const routes = [
   {
@@ -17,7 +18,8 @@ const routes = [
     path: "/layout",
     name: "layout",
     component: () => import("../views/Layout.vue"),
-  },
+    beforeEnter: routerCheckToken,
+  }
 ];
 
 const router = createRouter({

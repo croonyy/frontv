@@ -87,6 +87,7 @@
     </a-layout>
   </a-layout>
 </template>
+
 <script setup>
 import {
   MenuItem as AMenuItem,
@@ -110,12 +111,11 @@ import {
   MenuFoldOutlined,
 } from "@ant-design/icons-vue";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { request, authRequest, check_token } from "../utils/requests";
+import { request, authRequest, checkToken } from "../utils/requests";
 
 
-
-let $router = useRouter();
+// import { useRouter } from "vue-router";
+// let $router = useRouter();
 // 选中的选项
 let selectedKeys = ref(["1"]);
 // 展开的选项
@@ -131,14 +131,16 @@ const test = async () => {
 };
 
 const test1 = async () => {
-  let ret = await authRequest.post("func_view_test/",{a:10});
+  let ret = await authRequest.get("test/");
   console.log(ret.data);
 };
 
 const test2 = async () => {
-  await check_token()
+  await checkToken()
 };
 </script>
+
+
 <style scoped lang="scss">
 .layout {
   width: 100vw;
